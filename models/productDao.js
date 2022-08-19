@@ -1,6 +1,6 @@
 const { AppDataSource } = require('./dataSource');
 
-const createReview = async (content, userId, productId) => {
+const createReview = async (content, userIdCode, productId) => {
     try {
         await AppDataSource.query(`
             INSERT INTO reviews(
@@ -8,7 +8,7 @@ const createReview = async (content, userId, productId) => {
                 user_id,
                 product_id
             ) VALUES (?, ?, ?)`,
-            [content, userId, productId]
+            [content, userIdCode, productId]
         );
     } catch (err) {
         const error = new Error('INVALID_DATA');

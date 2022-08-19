@@ -30,7 +30,6 @@ const signIn = async (req, res) => {
 
 const loadUserInfo = async (req, res) => {
     const { userId } = req.body;
-    console.log(userId);
 
     const user = await userService.loadUserInfo(userId);
 

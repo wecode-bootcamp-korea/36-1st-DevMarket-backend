@@ -2,13 +2,13 @@ const prodcutService = require('../services/productService');
 
 const createReview = async (req, res) => {
     try {
-        const { content, userId, productId } = req.body;
+        const { content, userIdCode, productId } = req.body;
 
-        if (!content || !userId || !productId) {
+        if (!content || !userIdCode || !productId) {
             return res.status(404).json({ message: "KEY_ERROR" });
         }
 
-        await prodcutService.createReview(content, userId, productId);
+        await prodcutService.createReview(content, userIdCode, productId);
 
         res.status(201).json({ message: 'REVIEW_CREATED' });
     } catch (err) {

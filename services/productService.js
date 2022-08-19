@@ -1,8 +1,8 @@
 const productDao = require('../models/productDao');
 const userDao = require('../models/userDao');
 
-const createReview = async (content, userId, productId) => {
-    const user = await userDao.getUserById(userId);
+const createReview = async (content, userIdCode, productId) => {
+    const user = await userDao.getUserById(userIdCode);
     const product = await productDao.getProductById(productId);
 
     if (!user || !product) {
@@ -11,7 +11,7 @@ const createReview = async (content, userId, productId) => {
         throw err;
     }
 
-    await productDao.createReview(content, userId, productId);
+    await productDao.createReview(content, userIdCode, productId);
 }
 
 const loadReviews = async (productId) => {

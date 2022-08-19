@@ -1,7 +1,5 @@
 const express = require('express');
 const productController = require('../controllers/productController');
-const validation = require('../middlewares/auth');
-
 const router = express.Router();
 
 router.post('/review', productController.createReview);
