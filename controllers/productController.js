@@ -5,7 +5,7 @@ const createReview = async (req, res) => {
         const { content, userIdCode, productId } = req.body;
 
         if (!content || !userIdCode || !productId) {
-            return res.status(404).json({ message: "KEY_ERROR" });
+            return res.status(400).json({ message: "KEY_ERROR" });
         }
 
         await prodcutService.createReview(content, userIdCode, productId);
