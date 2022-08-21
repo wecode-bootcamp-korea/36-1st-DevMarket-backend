@@ -21,12 +21,14 @@ const loadReviews = async (productId) => {
     try {
         return await AppDataSource.query(`
             SELECT
-                id,
-                content,
-                user_id,
-                product_id
+                reviews.id,
+                reviews.content,
+                reviews.product_id,
+                users.name,
+                users.user_name
             FROM reviews
-            WHERE product_id = ${productId}`
+            INNER JOIN users ON reviews.product_id = ${productId}
+            AND users.id = reviews.user_id`
         );
     } catch (err) {
         const error = new Error('INVALID_DATA');
