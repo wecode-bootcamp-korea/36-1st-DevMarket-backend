@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/signup', errorHandler(userController.signUp));
 router.post('/signin', errorHandler(userController.signIn));
-router.get('/info', validation.validateToken, userController.loadUserInfo);
+router.get('/info', validation.validateToken, errorHandler(userController.loadUserInfo));
 
 module.exports = {
     router
