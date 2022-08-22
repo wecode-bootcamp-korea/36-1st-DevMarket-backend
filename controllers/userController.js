@@ -1,31 +1,24 @@
 const userService = require('../services/userService');
 
 const signUp = async (req, res) => {
-    try {
-        const { userName, password, name, email, phoneNumber, birth } = req.body;
+    const { userName, password, name, email, phoneNumber, birth } = req.body;
 
-        if (!userName || !password || !name || !email || !phoneNumber || !birth) {
-            return res.status(400).json({ message: "KEY_ERROR" });
-        }
-
+    if (!userName || !password || !name || !email || !phoneNumber || !birth) {
+        const err = new Error("KEY_ERROR");
+        err.statusCode = 400;
+        throw err;
+    }
         await userService.signUp(userName, password, name, email, phoneNumber, birth);
 
-        res.status(201).json({ message: 'SIGNUP_SUCCESS' });
-    } catch (err) {
-        return res.status(err.statusCode || 500).json({ message: err.message });
-    }
+    res.status(201).json({ message: 'SIGNUP_SUCCESS' });
 }
 
 const signIn = async (req, res) => {
-    try {
-        const { userName, password } = req.body;
+    const { userName, password } = req.body;
 
-        const accessToken = await userService.signIn(userName, password);
+    const accessToken = await userService.signIn(userName, password);
 
-        res.status(200).json({ authorization: accessToken });
-    } catch (err) {
-        res.status(err.statusCode ? err.statusCode : 401).json({ message: err.message });
-    }
+    res.status(200).json({ authorization: accessToken });
 }
 
 const loadUserInfo = async (req, res) => {

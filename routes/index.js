@@ -4,7 +4,6 @@ const router = express.Router();
 const userRouter = require('./userRouter');
 const validation = require('../middlewares/auth');
 
-
-router.use("/user", userRouter.router);
+router.use("/users", userRouter.router);
 
 module.exports = router;
