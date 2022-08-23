@@ -17,7 +17,7 @@ AppDataSource.initialize()
         console.error("Error during Data Source initialization", err);
         database.destroy()
     })
-    
+
 module.exports = {
     AppDataSource
 }
