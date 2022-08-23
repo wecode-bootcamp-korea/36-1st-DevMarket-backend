@@ -11,7 +11,7 @@ const validateToken = async (req, res, next) => {
 
         if (!foundUser)
             errorGenerator({ statusCode: 400, message: 'USER_NOT_FOUND' });
-        req.user = { name: userName, id: userId }
+        req.user = { name: userName, id: userId };
         next();
     } catch (err) {
         next(err);
