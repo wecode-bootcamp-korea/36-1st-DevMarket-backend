@@ -1,7 +1,7 @@
 const { AppDataSource } = require('./dataSource');
 const appError = require('../middlewares/appError');
 
-const createReview = async (content, userIdCode, productId) => {
+const createReview = async (content, userId, productId) => {
     try {
         await AppDataSource.query(`
             INSERT INTO reviews(
@@ -9,7 +9,7 @@ const createReview = async (content, userIdCode, productId) => {
                 user_id,
                 product_id
             ) VALUES (?, ?, ?)`,
-            [content, userIdCode, productId]
+            [content, userId, productId]
         );
     } catch (err) {
         throw new appError('INVALID_DATA_INPUT', 500);
