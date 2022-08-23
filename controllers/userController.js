@@ -21,7 +21,7 @@ const signIn = async (req, res) => {
 }
 
 const loadUserInfo = async (req, res) => {
-    const { userName } = req.body;
+    const  userName  = req.user.name;
 
     const user = await userService.loadUserInfo(userName);
 

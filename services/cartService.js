@@ -1,13 +1,7 @@
 const cartDao = require("../models/cartDao");
 
-const cartList = async(userId) => {
-    const list = await cartDao.productList(
-        userId
-    );
-
-    return list;
-};
+const getCartLists = async (userId) => await cartDao.getProductsList(userId);
 
 module.exports = {
-    cartList
+    getCartLists
 }
