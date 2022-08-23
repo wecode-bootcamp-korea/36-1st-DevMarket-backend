@@ -1,13 +1,12 @@
 const userService = require('../services/userService');
+const appError = require('../middlewares/appError');
 
 const signUp = async (req, res) => {
     const { userName, password, name, email, phoneNumber, birth } = req.body;
 
-    if (!userName || !password || !name || !email || !phoneNumber || !birth) {
-        const err = new Error("KEY_ERROR");
-        err.statusCode = 400;
-        throw err;
-    }
+    if (!userName || !password || !name || !email || !phoneNumber || !birth)
+        throw new appError('KEY_ERROR', 400);
+
         await userService.signUp(userName, password, name, email, phoneNumber, birth);
 
     res.status(201).json({ message: 'SIGNUP_SUCCESS' });
