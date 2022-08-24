@@ -27,6 +27,8 @@ const getReviews = async (req, res) => {
 const deleteReview = async (req, res) => {
     const { reviewId } = req.body;
 
+    if (!reviewId) throw new appError('KEY_ERROR', 400);
+
     await productService.deleteReview(reviewId);
 
     res.status(200).json({ message: "DELETE_SUCCESS" })
