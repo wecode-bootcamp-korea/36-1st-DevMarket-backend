@@ -36,7 +36,25 @@ const addProduct = async (userId, productId, amount) => {
     };
 };
 
+const checkCartList = async (userId, productId) => {
+    try{
+        const [check] = await AppDataSource.query(
+        `SELECT
+                user_id,
+                product_id
+        FROM cart
+        WHERE user_id = ${userId}
+        AND product_id = ${productId};
+        `);
+        return check;
+    } catch (err) {
+        throw new appError('INVALID_DATA_INPUT', 500);
+    };
+};
+
 module.exports = {
     getProductsList,
-    addProduct
+    addProduct,
+    checkCartList
+    
 }
