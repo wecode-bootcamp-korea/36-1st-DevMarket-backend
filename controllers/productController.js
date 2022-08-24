@@ -13,6 +13,16 @@ const createReview = async (req, res) => {
     res.status(201).json({ message: 'REVIEW_CREATED' });
 }
 
+const loadReviews = async (req, res) => {
+    const { productId } = req.params;
+    const { _start, _limit } = req.query;
+
+    const reviews = await prodcutService.loadReviews(productId, _start, _limit);
+
+    res.status(200).json(reviews);
+}
+
 module.exports = {
-    createReview
+    createReview,
+    loadReviews
 }
