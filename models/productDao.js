@@ -36,6 +36,18 @@ const getReviews = async (productId, start, limit) => {
     }
 }
 
+const deleteReview = async (reviewId) => {
+    try {
+        await AppDataSource.query(`
+            DELETE FROM reviews
+            WHERE reviews.id = ${reviewId}`
+        );
+    } catch (err) {
+        throw new appError('INVALID_DATA_INPUT', 500)
+    }
+}
+
+
 const getProductById = async (productId) => {
     const [product] = await AppDataSource.query(`
         SELECT
@@ -52,8 +64,25 @@ const getProductById = async (productId) => {
     return product;
 }
 
+const getReviewById = async (reviewId) => {
+    const [review] = await AppDataSource.query(`
+        SELECT
+            id,
+            content,
+            user_id,
+            product_id
+        FROM reviews
+        WHERE id = ?`,
+        [reviewId]
+    );
+
+    return review;
+}
+
 module.exports = {
     createReview,
     getProductById,
-    getReviews
+    getReviews,
+    deleteReview,
+    getReviewById
 }
