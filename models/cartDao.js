@@ -1,4 +1,5 @@
 const { AppDataSource } = require("../models/dataSource");
+const appError = require('../middlewares/appError');
 
 const getProductsList = async (userId) => {
     try {
@@ -17,9 +18,7 @@ const getProductsList = async (userId) => {
             WHERE user_id = ${userId};
             `);
     } catch (err) {
-        const error = new Error('INVALID_DATA_INPUT');
-        error.statusCode = 500;
-        throw error;
+        throw new appError('INVALID_DATA_INPUT', 500);
     };
 };
 
