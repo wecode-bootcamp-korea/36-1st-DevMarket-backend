@@ -9,6 +9,16 @@ const createReview = async (content, userId, productId) => {
     await productDao.createReview(content, userId, productId);
 }
 
+const getReviews = async (productId, start, limit) => {
+    const product = await productDao.getProductById(productId);
+
+    if (!product) throw new appError('PRODUCT_NOT_EXIST', 409);
+
+    return await productDao.getReviews(productId, parseInt(start), parseInt(limit));
+}
+
+
 module.exports = {
     createReview,
+    getReviews
 }
