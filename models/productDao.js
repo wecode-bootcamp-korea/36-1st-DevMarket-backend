@@ -43,7 +43,7 @@ const getProductById = async (productId) => {
             name,
             weight,
             price,
-            made_in₩
+            made_in
         FROM products
         WHERE id = ?`,
         [productId]
