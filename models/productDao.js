@@ -49,6 +49,18 @@ const deleteReview = async (reviewId) => {
     }
 }
 
+const updateReview = async (content, reviewId) => {
+    try {
+        await AppDataSource.query(`
+            UPDATE reviews
+                SET content = ?
+            WHERE id = ${reviewId}`,
+            [content, reviewId]
+        );
+    } catch (err) {
+        throw new appError('INVALID_DATA_INPUT', 500)
+    }
+}
 
 const getProductById = async (productId) => {
     const [product] = await AppDataSource.query(`
@@ -86,5 +98,6 @@ module.exports = {
     getProductById,
     getReviews,
     deleteReview,
-    getReviewById
+    getReviewById,
+    updateReview
 }
