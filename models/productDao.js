@@ -16,7 +16,7 @@ const createReview = async (content, userId, productId) => {
     }
 }
 
-const getReviews = async (productId, _start, _limit) => {
+const getReviews = async (productId, start, limit) => {
     try {
         return await AppDataSource.query(`
             SELECT
@@ -29,7 +29,7 @@ const getReviews = async (productId, _start, _limit) => {
             INNER JOIN users ON (reviews.product_id = ${productId}
             AND users.id = reviews.user_id)
             ORDER BY reviews.id DESC
-            LIMIT ${_limit} OFFSET ${_start}`
+            LIMIT ${limit} OFFSET ${start}`
         );
     } catch (err) {
         throw new appError('INVALID_DATA_INPUT', 500);

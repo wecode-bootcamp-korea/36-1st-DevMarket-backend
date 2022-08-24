@@ -15,10 +15,9 @@ const createReview = async (req, res) => {
 
 const getReviews = async (req, res) => {
     const { productId } = req.params;
-    const { _start, _limit } = req.query;
+    const { start, limit } = req.query;
 
-    if (!productId) throw new appError('KEY_ERROR', 400);
-    if (!_start && !_limit) { _start = 0; _limit = 30; }
+    if (!productId || !start || !limit) throw new appError('KEY_ERROR', 400);
 
     const reviews = await productService.getReviews(productId, _start, _limit);
 

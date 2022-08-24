@@ -64,6 +64,15 @@ const userValidation = (userName, password, name, email, phoneNumber, birth) => 
     validateBirth(birth);
 }
 
+const validatePageNationValue = (start, limit) => {
+    const re = new RegExp(
+        /^[0-9]]+$/
+    );
+
+    if (!re.test(parseInt(start)) || !re.test(parseInt(limit)))
+        throw new appError('INVALID_INPUT', 409);
+}
+
 module.exports = {
     validateEmail,
     validateUserId,
@@ -71,5 +80,6 @@ module.exports = {
     validatePhoneNumber,
     validateBirth,
     validateName,
-    userValidation
+    userValidation,
+    validatePageNationValue
 };

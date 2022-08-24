@@ -1,4 +1,5 @@
 const productDao = require('../models/productDao');
+const validation = require('../utils/validators');
 const appError = require('../middlewares/appError');
 
 const createReview = async (content, userId, productId) => {
@@ -9,12 +10,14 @@ const createReview = async (content, userId, productId) => {
     await productDao.createReview(content, userId, productId);
 }
 
-const getReviews = async (productId, _start, _limit) => {
+const getReviews = async (productId, start, limit) => {
     const product = await productDao.getProductById(productId);
 
     if (!product) throw new appError('PRODUCT_NOT_EXIST', 409);
 
-    return await productDao.getReviews(productId, parseInt(_start), parseInt(_limit));
+    validation.validatePageNationValue(start, limit);
+
+    return await productDao.getReviews(productId, parseInt(start), parseInt(limit));
 }
 
 
