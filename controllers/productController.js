@@ -25,7 +25,7 @@ const getReviews = async (req, res) => {
 }
 
 const deleteReview = async (req, res) => {
-    const { reviewId } = req.body;
+    const { reviewId } = req.params;
 
     if (!reviewId) throw new appError('KEY_ERROR', 400);
 

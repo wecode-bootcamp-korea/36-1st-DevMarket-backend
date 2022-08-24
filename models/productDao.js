@@ -38,10 +38,12 @@ const getReviews = async (productId, start, limit) => {
 
 const deleteReview = async (reviewId) => {
     try {
-        await AppDataSource.query(`
+        const deleteRows = (await AppDataSource.query(`
             DELETE FROM reviews
             WHERE reviews.id = ${reviewId}`
-        );
+        )).affectedRows;
+        if (deleteRows !== 0 && deleteRows !== 1) throw new appError('UNEXPECTED_NUMBER_OF_RECORDS_DELETED', 500)
+
     } catch (err) {
         throw new appError('INVALID_DATA_INPUT', 500)
     }
