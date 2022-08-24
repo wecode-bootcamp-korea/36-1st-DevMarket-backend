@@ -22,6 +22,21 @@ const getProductsList = async (userId) => {
     };
 };
 
+const addProduct = async (userId, productId, amount) => {
+    try {
+        return await AppDataSource.query(
+            `INSERT INTO cart(
+                user_id,
+                product_id,
+                amount
+            ) VALUES (?, ?, ?);
+            `, [userId, productId, amount]);
+    } catch (err) {
+        throw new appError('INVALID_DATA_INPUT', 500);
+    };
+};
+
 module.exports = {
-    getProductsList
+    getProductsList,
+    addProduct
 }

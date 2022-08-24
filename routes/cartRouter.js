@@ -1,9 +1,9 @@
 const express = require("express");
 const cartController = require("../controllers/cartController");
-const validation = require("../middlewares/auth");
 const router = express.Router();
 
-router.get("/list", validation.validateToken,cartController.getCartLists);
+router.get("/list", cartController.getCartLists);
+router.post("/product", cartController.addProduct);
 
 module.exports = {
     router
