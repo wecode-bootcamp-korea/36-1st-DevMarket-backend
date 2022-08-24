@@ -4,7 +4,7 @@ const productController = require('../controllers/productController');
 const validation = require('../middlewares/auth');
 const router = express.Router();
 
-router.get('/:productId/reviews', errorHandler(productController.loadReviews));
+router.get('/:productId/reviews', errorHandler(productController.getReviews));
 router.post('/:productId/reviews', validation.validateToken, errorHandler(productController.createReview));
 
 module.exports = {

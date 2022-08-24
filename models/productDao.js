@@ -16,7 +16,7 @@ const createReview = async (content, userId, productId) => {
     }
 }
 
-const loadReviews = async (productId, _start, _limit) => {
+const getReviews = async (productId, _start, _limit) => {
     try {
         return await AppDataSource.query(`
             SELECT
@@ -43,7 +43,7 @@ const getProductById = async (productId) => {
             name,
             weight,
             price,
-            made_in
+            made_in₩
         FROM products
         WHERE id = ?`,
         [productId]
@@ -55,5 +55,5 @@ const getProductById = async (productId) => {
 module.exports = {
     createReview,
     getProductById,
-    loadReviews
+    getReviews
 }

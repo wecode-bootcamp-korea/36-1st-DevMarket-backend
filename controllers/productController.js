@@ -13,19 +13,19 @@ const createReview = async (req, res) => {
     res.status(201).json({ message: 'REVIEW_CREATED' });
 }
 
-const loadReviews = async (req, res) => {
+const getReviews = async (req, res) => {
     const { productId } = req.params;
     const { _start, _limit } = req.query;
 
     if (!productId) throw new appError('KEY_ERROR', 400);
     if (!_start && !_limit) { _start = 0; _limit = 30; }
 
-    const reviews = await productService.loadReviews(productId, _start, _limit);
+    const reviews = await productService.getReviews(productId, _start, _limit);
 
     res.status(200).json(reviews);
 }
 
 module.exports = {
     createReview,
-    loadReviews
+    getReviews
 }
