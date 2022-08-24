@@ -1,4 +1,4 @@
-const prodcutService = require('../services/productService');
+const productService = require('../services/productService');
 const appError = require('../middlewares/appError');
 
 const createReview = async (req, res) => {
@@ -8,7 +8,7 @@ const createReview = async (req, res) => {
 
     if (!content || !productId) throw new appError('KEY_ERROR', 400);
 
-    await prodcutService.createReview(content, userId, productId);
+    await productService.createReview(content, userId, productId);
 
     res.status(201).json({ message: 'REVIEW_CREATED' });
 }
@@ -17,7 +17,10 @@ const loadReviews = async (req, res) => {
     const { productId } = req.params;
     const { _start, _limit } = req.query;
 
-    const reviews = await prodcutService.loadReviews(productId, _start, _limit);
+    if (!productId) throw new appError('KEY_ERROR', 400);
+    if (!_start && !_limit) { _start = 0; _limit = 30; }
+
+    const reviews = await productService.loadReviews(productId, _start, _limit);
 
     res.status(200).json(reviews);
 }

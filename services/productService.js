@@ -14,8 +14,6 @@ const loadReviews = async (productId, _start, _limit) => {
 
     if (!product) throw new appError('PRODUCT_NOT_EXIST', 409);
 
-    if (!_start && !_limit) { _start = 0; _limit = 40; }
-
     return await productDao.loadReviews(productId, parseInt(_start), parseInt(_limit));
 }
 
