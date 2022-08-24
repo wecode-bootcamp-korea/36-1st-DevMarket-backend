@@ -24,7 +24,18 @@ const getReviews = async (req, res) => {
     res.status(200).json(reviews);
 }
 
+const deleteReview = async (req, res) => {
+    const { reviewId } = req.params;
+
+    if (!reviewId) throw new appError('KEY_ERROR', 400);
+
+    await productService.deleteReview(reviewId);
+
+    res.status(200).json({ message: "DELETE_SUCCESS" })
+}
+
 module.exports = {
     createReview,
-    getReviews
+    getReviews,
+    deleteReview
 }

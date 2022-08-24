@@ -17,8 +17,16 @@ const getReviews = async (productId, start, limit) => {
     return await productDao.getReviews(productId, parseInt(start), parseInt(limit));
 }
 
+const deleteReview = async (reviewId) => {
+    const review = await productDao.getReviewById(reviewId);
+
+    if (!review) throw new appError('REVIEW_NOT_EXIST', 409);
+
+    await productDao.deleteReview(reviewId);
+}
 
 module.exports = {
     createReview,
-    getReviews
+    getReviews,
+    deleteReview
 }
