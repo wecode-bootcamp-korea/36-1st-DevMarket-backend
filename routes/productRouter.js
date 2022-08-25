@@ -9,6 +9,13 @@ router.post('/:productId/reviews', validation.validateToken, errorHandler(produc
 router.delete('/reviews/:reviewId', validation.validateToken, errorHandler(productController.deleteReview));
 router.patch('/reviews/:reviewId', validation.validateToken, errorHandler(productController.updateReview));
 
+router.get("/all", errorHandler(productController.loadProductList));
+router.get("/ascending", errorHandler(productController.getProductsByAsc));
+router.get("/descending", errorHandler(productController.getProductsByDesc));
+router.get("/list", errorHandler(productController.getProductsByCategories));
+router.post("/cart", validation.validateToken, errorHandler(productController.addProductAmount));
+router.get("/detail/:productId", errorHandler(productController.getProductDetail));
+
 module.exports = {
     router
 }
