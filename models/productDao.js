@@ -92,6 +92,7 @@ const getReviewById = async (reviewId) => {
 
     return review;
 }
+
 const loadProductList = async (start, limit) => {
     try {
         const list = await AppDataSource.query(
@@ -107,7 +108,7 @@ const loadProductList = async (start, limit) => {
             `);
         return list;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -128,7 +129,7 @@ const loadProductDetail = async (productId) => {
             `);
         return detail;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -147,7 +148,7 @@ const getProductsByAsc = async (start, limit) => {
             `);
         return list;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -166,7 +167,7 @@ const getProductsByDesc = async (start, limit) => {
             `);
         return list;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -192,7 +193,7 @@ const getProductsByHighCate = async (prod, start, limit) => {
             `)
         return list;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -216,7 +217,7 @@ const getProductsByMiddleCate = async (prod, start, limit) => {
             `)
         return list;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -238,7 +239,7 @@ const getProductsByLowCate = async (prod, start, limit) => {
             `)
         return list;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -252,7 +253,7 @@ const addProductAmount = async (userId, productId, amount) => {
             ) VALUES (?, ?, ?);
             `, [userId, productId, amount]);
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 
@@ -267,7 +268,7 @@ const checkProductAmount = async (userId, productId) => {
             `)
         return result;
     } catch (err) {
-        throw new AppError('INVALID_DATA_INPUT', 500)
+        throw new appError('INVALID_DATA_INPUT', 500)
     };
 };
 

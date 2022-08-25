@@ -24,7 +24,7 @@ const getProductsList = async (userId) => {
 
 const addProduct = async (userId, productId, amount) => {
     try {
-        return await AppDataSource.query(
+        await AppDataSource.query(
             `INSERT INTO cart(
                 user_id,
                 product_id,
@@ -36,10 +36,35 @@ const addProduct = async (userId, productId, amount) => {
     };
 };
 
+const deleteCart = async (userId, productId) => {
+    try {
+        await AppDataSource.query(
+            `DELETE FROM cart
+               WHERE user_id = ${userId}
+               AND product_id = ${productId};
+           `);
+    } catch (err) {
+        throw new appError('INVALID_DATA_INPUT', 500);
+    };
+};
+
+const updateAmount = async (userId, productId, amount) => {
+    try {
+        await AppDataSource.query(
+            `UPDATE cart
+            SET
+                amount = amount + ${amount}
+            WHERE user_id = ${userId} AND product_id = ${productId};
+            `);
+    } catch (err) {
+        throw new appError('INVALID_DATA_INPUT', 500);
+    };
+};
+
 const checkCartList = async (userId, productId) => {
-    try{
+    try {
         const [check] = await AppDataSource.query(
-        `SELECT
+            `SELECT
                 user_id,
                 product_id
         FROM cart
@@ -55,6 +80,7 @@ const checkCartList = async (userId, productId) => {
 module.exports = {
     getProductsList,
     addProduct,
-    checkCartList
-    
+    checkCartList,
+    deleteCart,
+    updateAmount
 }

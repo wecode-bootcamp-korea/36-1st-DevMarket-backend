@@ -1,5 +1,4 @@
 const productDao = require('../models/productDao');
-const cartDao = require("../models/cartDao");
 const appError = require('../middlewares/appError');
 
 const createReview = async (content, userId, productId) => {
@@ -14,6 +13,8 @@ const getReviews = async (productId, start, limit) => {
     const product = await productDao.getProductById(productId);
 
     if (!product) throw new appError('PRODUCT_NOT_EXIST', 409);
+
+    if (start === "null") start = "0";
 
     return await productDao.getReviews(productId, parseInt(start), parseInt(limit));
 }
@@ -34,76 +35,44 @@ const updateReview = async (content, reviewId) => {
     await productDao.updateReview(content, reviewId);
 }
 
-const loadProductList = async(start, limit) => {
-    if ( !start && !limit ) { start = 0; limit = 30; };
+const loadProductList = async (start, limit) => {
+    if (!start && !limit) { start = 0; limit = 30; };
 
-    const loadProductList = await productDao.loadProductList(parseInt(start),parseInt(limit));
-
-    return loadProductList;
+    return await productDao.loadProductList(parseInt(start), parseInt(limit));
 };
 
 const getProductDetail = async (productId) => await productDao.loadProductDetail(productId);
 
-const getProductsByAsc = async(start, limit) => {
-    if ( !start && !limit ) { start = 0; limit = 30; };
+const getProductsByAsc = async (start, limit) => {
+    if (!start && !limit) { start = 0; limit = 30; };
 
-    const getProductsByAsc = await productDao.getProductsByAsc(parseInt(start),parseInt(limit));
-
-    return getProductsByAsc;
+    return await productDao.getProductsByAsc(parseInt(start), parseInt(limit));
 };
 
-const getProductsByDesc = async(start, limit) => {
-    if ( !start && !limit ) { start = 0; limit = 30; };
-    
-    const getProductsByDesc = await productDao.getProductsByDesc(parseInt(start),parseInt(limit));
+const getProductsByDesc = async (start, limit) => {
+    if (!start && !limit) { start = 0; limit = 30; };
 
-    return getProductsByDesc;
+    return await productDao.getProductsByDesc(parseInt(start), parseInt(limit));
 };
 
-const getProductsByCategories = async(cate, prod, start, limit) => {
-    if (cate == 1) {
+const getProductsByCategories = async (cate, prod, start, limit) => {
+    if (cate == 1) return await productDao.getProductsByHighCate(prod, start, limit);
 
-        const getProductsByHighCate = await productDao.getProductsByHighCate(prod, start, limit);
+    else if (cate == 2) return await productDao.getProductsByMiddleCate(prod, start, limit);
 
-        return getProductsByHighCate;
+    else if (cate == 3) return await productDao.getProductsByLowCate(prod, start, limit);
 
-    } else if (cate == 2) {
-
-        const getProductsByMiddleCate = await productDao.getProductsByMiddleCate(prod, start, limit);
-
-        return getProductsByMiddleCate;
-
-    } else if (cate == 3) {
-
-        const getProductsByLowCate = await productDao.getProductsByLowCate(prod, start, limit);
-
-        return getProductsByLowCate;
-
-    } else {
-
-        throw new AppError('INVALID_DATA_INPUT', 409);
-    };
+    else throw new appError('INVALID_DATA_INPUT', 409);
 };
 
 const addProductAmount = async (userId, productId, amount) => {
-    const checkProductAmount = await productDao.checkProductAmount(userId,productId);
+    const checkProductAmount = await productDao.checkProductAmount(userId, productId);
 
-    if (checkProductAmount) {
+    if (checkProductAmount) return await cartDao.updateAmount(userId, productId, amount);
 
-        const updateAmount = await cartDao.updateAmount(userId, productId, amount);
+    else if (!checkProductAmount) return await cartDao.addProduct(userId, productId, amount);
 
-        return updateAmount;
-
-    } else if (!checkProductAmount) {
-
-        const addProduct = await cartDao.addProduct(userId, productId, amount);
-
-        return addProduct;
-
-    } else {
-
-        throw new AppError('INVALID_DATA_INPUT', 409);
-    };
+    else throw new appError('INVALID_DATA_INPUT', 409);
 };
 
 module.exports = {
