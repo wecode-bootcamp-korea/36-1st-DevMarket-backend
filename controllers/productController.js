@@ -19,7 +19,7 @@ const getReviews = async (req, res) => {
 
     if (!productId || !start || !limit) throw new appError('KEY_ERROR', 400);
 
-    const reviews = await productService.getReviews(productId, _start, _limit);
+    const reviews = await productService.getReviews(productId, start, limit);
 
     res.status(200).json(reviews);
 }
@@ -46,9 +46,79 @@ const updateReview = async (req, res) => {
     res.status(200).json({ message: "UPDATE_SUCCESS" });
 }
 
+const loadProductList = async (req, res) => {
+    const { start, limit } = req.query;
+
+    if(!start || !limit) throw new appError('KEY_ERROR', 400);
+
+    const list = await productService.loadProductList(start, limit);
+    
+    return res.status(200).json(list);
+};
+
+const getProductDetail = async (req, res) => {
+    const { productId } = req.params;
+
+    if(!productId) throw new appError('KEY_ERROR', 400);
+
+    const product = await productService.getProductDetail(productId);
+
+    return res.status(200).json(product);
+};
+
+const getProductsByAsc = async (req, res) => {
+    const {start, limit} = req.query;
+
+    if(!start || !limit) throw new appError('KEY_ERROR', 400);
+
+    const list = await productService.getProductsByAsc(start, limit);
+    
+    return res.status(200).json(list);
+};
+
+const getProductsByDesc = async (req, res) => {
+    const {start, limit} = req.query;
+    
+    if(!start || !limit) throw new appError('KEY_ERROR', 400);
+
+    const list = await productService.getProductsByDesc(start, limit);
+    
+    return res.status(201).json(list);
+};
+
+const getProductsByCategories = async (req, res) => {
+    const {cate, prod, start, limit} = req.query;
+    
+    if(!cate || !prod || !start || !limit) throw new appError('KEY_ERROR', 400);
+
+    const list = await productService.getProductsByCategories(cate, prod, start, limit);
+    
+    return res.status(200).json(list);
+};
+
+const addProductAmount = async (req, res) => {
+    console.log("ping");
+    const userId = req.user.id
+    console.log("ping");
+
+    const {productId, amount} = req.body;
+
+    if(!userId || !productId || !amount) throw new appError('KEY_ERROR', 400);
+
+    await productService.addProductAmount(userId, productId, amount);
+
+    return res.status(201).json({message : "PRODUCT_ADDED"})
+};
+
 module.exports = {
     createReview,
     getReviews,
     deleteReview,
-    updateReview
+    updateReview,
+    loadProductList,
+    getProductDetail,
+    getProductsByAsc,
+    getProductsByDesc,
+    getProductsByCategories,
+    addProductAmount
 }
