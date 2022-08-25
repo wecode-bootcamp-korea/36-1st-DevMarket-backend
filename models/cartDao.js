@@ -83,4 +83,5 @@ module.exports = {
     checkCartList,
     deleteCart,
     updateAmount
+    
 }
