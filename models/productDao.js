@@ -97,6 +97,7 @@ const loadProductList = async (start, limit) => {
     try {
         const list = await AppDataSource.query(
             `SELECT
+                    id,
                     name,
                     weight,
                     amount,
@@ -137,6 +138,7 @@ const getProductsByAsc = async (start, limit) => {
     try {
         const list = await AppDataSource.query(
             `SELECT
+                    id,
                     name,
                     weight,
                     amount,
@@ -156,6 +158,7 @@ const getProductsByDesc = async (start, limit) => {
     try {
         const list = await AppDataSource.query(
             `SELECT 
+                    id,
                     name,
                     weight,
                     amount,
