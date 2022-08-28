@@ -1,5 +1,5 @@
 const { AppDataSource } = require("../models/dataSource");
-const appError = require('../middlewares/appError');
+const AppError = require('../middlewares/appError');
 
 const getProductsList = async (userId) => {
     try {
@@ -18,7 +18,7 @@ const getProductsList = async (userId) => {
             WHERE user_id = ${userId};
             `);
     } catch (err) {
-        throw new appError('INVALID_DATA_INPUT', 500);
+        throw new AppError('INVALID_DATA_INPUT', 500);
     };
 };
 
@@ -32,7 +32,7 @@ const addProduct = async (userId, productId, amount) => {
             ) VALUES (?, ?, ?);
             `, [userId, productId, amount]);
     } catch (err) {
-        throw new appError('INVALID_DATA_INPUT', 500);
+        throw new AppError('INVALID_DATA_INPUT', 500);
     };
 };
 
@@ -44,7 +44,7 @@ const deleteCart = async (userId, productId) => {
                AND product_id = ${productId};
            `);
     } catch (err) {
-        throw new appError('INVALID_DATA_INPUT', 500);
+        throw new AppError('INVALID_DATA_INPUT', 500);
     };
 };
 
@@ -57,7 +57,7 @@ const updateAmount = async (userId, productId, amount) => {
             WHERE user_id = ${userId} AND product_id = ${productId};
             `);
     } catch (err) {
-        throw new appError('INVALID_DATA_INPUT', 500);
+        throw new AppError('INVALID_DATA_INPUT', 500);
     };
 };
 
@@ -73,7 +73,7 @@ const checkCartList = async (userId, productId) => {
         `);
         return check;
     } catch (err) {
-        throw new appError('INVALID_DATA_INPUT', 500);
+        throw new AppError('INVALID_DATA_INPUT', 500);
     };
 };
 

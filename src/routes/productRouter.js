@@ -1,5 +1,7 @@
+
+
 const express = require('express');
-const errorHandler = require('../middlewares/userErrorHandler');
+const errorHandler = require('../middlewares/errorHandler');
 const productController = require('../controllers/productController');
 const validation = require('../middlewares/auth');
 const router = express.Router();

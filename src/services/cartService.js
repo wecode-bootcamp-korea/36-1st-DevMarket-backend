@@ -1,5 +1,5 @@
 const cartDao = require("../models/cartDao");
-const appError = require('../middlewares/appError');
+const AppError = require('../middlewares/appError');
 
 const getCartLists = async (userId) => await cartDao.getProductsList(userId);
 
@@ -12,7 +12,7 @@ const addProduct = async (userId, productId, amount) => {
 
     if (!checkCartList) await cartDao.addProduct(userId, productId, amount);
 
-    else throw new appError('INVALID_DATA_INPUT', 409);
+    else throw new AppError('INVALID_DATA_INPUT', 409);
 };
 
 module.exports = {

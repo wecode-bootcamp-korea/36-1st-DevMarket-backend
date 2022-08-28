@@ -1,10 +1,10 @@
 const cartService = require("../services/cartService");
-const appError = require('../middlewares/appError');
+const AppError = require('../middlewares/appError');
 
 const getCartLists = async (req, res) => {
     const userId = req.user.id;
 
-    if (!userId) throw new appError('KEY_ERROR', 400);
+    if (!userId) throw new AppError('KEY_ERROR', 400);
 
     const list = await cartService.getCartLists(userId);
 
@@ -12,11 +12,13 @@ const getCartLists = async (req, res) => {
 };
 
 const addProduct = async (req, res) => {
-    const { productId, amount } = req.body;
+    const { amount } = req.body;
+
+    const { productId } = req.params;
 
     const userId = req.user.id;
 
-    if (!userId || !productId || !amount) throw new appError('KEY_ERROR', 400);
+    if (!userId || !productId || !amount) throw new AppError('KEY_ERROR', 400);
 
     await cartService.addProduct(userId, productId, amount);
 
@@ -24,11 +26,11 @@ const addProduct = async (req, res) => {
 };
 
 const deleteCart = async (req, res) => {
-    const { productId } = req.body;
+    const { productId } = req.params;
 
     const userId = req.user.id;
 
-    if (!userId || !productId) throw new appError('KEY_ERROR', 400);
+    if (!userId || !productId) throw new AppError('KEY_ERROR', 400);
 
     await cartService.deleteCart(userId, productId);
 
@@ -37,11 +39,13 @@ const deleteCart = async (req, res) => {
 
 const updateAmount = async (req, res) => {
 
-    const { productId, amount } = req.body;
+    const { amount } = req.body;
+
+    const { productId } = req.params;
 
     const userId = req.user.id;
 
-    if (!userId || !productId || !amount) throw new appError('KEY_ERROR', 400);
+    if (!userId || !productId || !amount) throw new AppError('KEY_ERROR', 400);
 
     await cartService.updateAmount(userId, productId, amount);
 

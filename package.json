@@ -28,6 +28,7 @@
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
+    "jest": "^29.0.3",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.19"
