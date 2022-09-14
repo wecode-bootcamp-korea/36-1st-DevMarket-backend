@@ -1,52 +1,77 @@
-# DevMarket 팀 BE
+# Indroduction
 
-- 개발기간 : 2022/8/16 ~ 2022/8/26
+프로젝트 기간동안 배민상회 웹페이지 구현해보기.
 
-- 개발 인원 : FE 4명, BE 2명
+## Development
 
-- 깃헙 주소 : https://github.com/wecode-bootcamp-korea/36-1st-DevMarket-backend
+* 개발기간   : 2022/08/16 ~ 2022/08/26
+* 개발인원   : 6 명
+* Frontend : 하서율, 임승민, 정원호, 함정석
+* Backend  : 정세한, 최종민
+* Backend 깃허브 주소 : (https://github.com/wecode-bootcamp-korea/36-1st-DevMarket-backend)
+* FrontEnd 깃허브 주소 : (https://github.com/wecode-bootcamp-korea/36-1st-DevMarket-frontend)
 
-## 프로젝트 선정이유
-가장 기본적인 이커머스 플랫폼이라서 한번 쯤 해본다면 기본기를 기르는데 큰 경험이 될거라 생각하였습니다.
-아래는 저희 사이트의 시연 영상 입니다. 
+## Skill
 
-로그인/ 회원가입 영상 https://youtu.be/DxVDubUYC4E
+|                                                Language                                                	|                                                   Framework                                                  	|                                                Database                                                	
+|:------------------------------------------------------------------------------------------------------:	|:------------------------------------------------------------------------------------------------------------:	|:------------------------------------------------------------------------------------------------------:	
+| ![Javascript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) 	| ![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge) 	| ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) 	
 
-메인페이지 영상 https://youtu.be/DQBhxa3uYYo
+## Database
 
-상세페이지 영상 https://youtu.be/6D0jun1-sa4
+![스크린샷 2022-08-25 오후 11 25 28](https://user-images.githubusercontent.com/81615965/187064293-32162714-03d0-4521-9c6d-53acf4cdb916.png)
 
-장바구니 영상 https://youtu.be/JfBnI8CU6us
+## Implement
 
-## DB Modeling
-![스크린샷 2022-08-27 오후 5 33 21](https://user-images.githubusercontent.com/43774005/187058044-36c80318-c581-466d-9534-620d8e30e9fd.png)
+## SignIn / SignUp
+https://youtu.be/DxVDubUYC4E
 
+### Product List (GET)
+https://youtu.be/DQBhxa3uYYo
 
-## Back-end 역활 분배 및 구현 기능
-최종민:
-  - ERD 설계
-  - JWT 토큰 인증 & 인가를 활용한 (로그인 / 회원가입/ 조회) API 구현
-  - 화원 상품 리뷰 (작성, 수정, 삭제, 조회) API 구현
-  - 에러 핸들 미들웨어 구현
+### Product Detail (GET)
+https://youtu.be/6D0jun1-sa4
 
-정세한: 
-  - ERD 설계
-  - 상품 상세 조회 API 구현
-  - 상품 장바구니 추가, 수량 조절, 삭제 API 구현
+### Cart (GET, POST, PATCH, DELETE)
+![장바구니  상세페이지 이동](https://user-images.githubusercontent.com/81615965/187064408-90c96016-5121-4fa6-91ea-822e8b0791d4.gif)
+![장바구니  수량 선택](https://user-images.githubusercontent.com/81615965/187064409-f3e60037-b674-40b0-8fef-6526b6b9b1b2.gif)
+![장바구니  제품 선택](https://user-images.githubusercontent.com/81615965/187064410-c4d447b9-4b89-4105-b004-f73f09432451.gif)
+![장바구니  삭제기능](https://user-images.githubusercontent.com/81615965/187064411-db19844a-60d3-4974-a2e5-0850072f4058.gif)
+![장바구니  상품등록](https://user-images.githubusercontent.com/81615965/187064412-d3fcbaef-0087-40f5-bf4d-0feb895f9ff3.gif)
 
-## Back-end 프로젝트 중점사항
-- 기본에 충실하며 가독성을 중시하고 누구나 봤을때 쉬워보이는 구조를 만들자!
+### Review
+![상세페이지 리뷰](https://user-images.githubusercontent.com/81615965/187064420-6d454286-1173-4bd4-a044-28e05af3e97d.gif)
 
-## Technologies
-- JavaScript
-- Node.js Web Framework
-- MySQL
-- Git, Github
+## APIs
 
-## Trello를 사용한 각자의 상황 공융
-![스크린샷 2022-08-28 오후 1 54 59](https://user-images.githubusercontent.com/43774005/187058275-17d5ded2-7f5d-451c-b2d4-5068186a66d6.png)
+### User
 
+|   End point   	| HTTP Method 	| Description 	| Status 	|
+|:-------------:	|:-----------:	|:-----------:	|:------:	|
+|  /users/signup 	|     POST    	|   회원가입  	|  201  	|
+| /users/signin 	|     POST    	|    로그인   	|  200  	|
+| /users/info 	|     GET    	|    유저 상세정보   	|  200  	|
 
-## Reference
+### Product (With Review)
 
-이 프로젝트는 배민상회 사이트를 참조하여 학습목적으로 만들었습니다. 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다. 프로젝트에서 사용하고 있는 사진 대부분은 위코드에서 구매한 것이므로 해당 프로젝트 외부인이 사용할 수 없습니다.
+|          End point         	| HTTP Method 	| Description 	| Status 	|
+|:--------------------------:	|:-----------:	|:-----------:	|:------:	|
+|          /products/all         	|     GET     	| 제품 전체 리스트 조회 	|  200  	|
+| /products/acending 	|     GET     	|  전체 제품 오름차순 조회 	|  200  	|
+|          /products/descending         	|     GET     	| 전체 제품 내림차순 조회 	|  200  	|
+|          /products/list         	|     GET     	| 제품 카테고리별 조회 	|  200  	|
+|          /products/cart         	|     POST     	| (상품 상세 페이지에서) 제품 장바구니에 추가	|  201  	|
+|          /products/detail/:productId         	|     GET     	| 제품 상세 조회 	|  200  	|
+|          /:products/reviews         	|     GET     	| 제품 리뷰 조회 	|  200  	|
+|          /:products/reviews         	|     POST     	| 제품 리뷰 등록 	|  201  	|
+|          /reviews/:reviewId         	|     DELETE     	| 제품 리뷰 삭제 	|  200  	|
+|          /reviews/:reviewId         	|     PATCH     	| 제품 리뷰 수정 	|  200  	|
+
+### CART
+
+|                    End point                   	| HTTP Method 	|     Description     	| Status 	|
+|:----------------------------------------------:	|:-----------:	|:-------------------:	|:------:	|
+|        /cart/list        	|  GET  	| 카트 내 상품 리스트 조회 	|  200  	|
+|        /cart/product        	|  POST  	| 카트에 상품 추가 	|  201  	|
+|        /cart/        	|  DELETE  	| 카트 상품 삭제 	|  200  	|
+|        /cart/amount        	|  PATCH  	| 카트 내 상품 수량 수정 	|  201  	|
