@@ -1,22 +1,19 @@
-
-
 const express = require('express');
-const errorHandler = require('../middlewares/errorHandler');
 const productController = require('../controllers/productController');
 const validation = require('../middlewares/auth');
 const router = express.Router();
 
-router.get('/:productId/reviews', errorHandler(productController.getReviews));
-router.post('/:productId/reviews', validation.validateToken, errorHandler(productController.createReview));
-router.delete('/reviews/:reviewId', validation.validateToken, errorHandler(productController.deleteReview));
-router.patch('/reviews/:reviewId', validation.validateToken, errorHandler(productController.updateReview));
+router.get('/:productId/reviews', productController.getReviews);
+router.post('/:productId/reviews', validation.validateToken, productController.createReview);
+router.delete('/reviews/:reviewId', validation.validateToken, productController.deleteReview);
+router.patch('/reviews/:reviewId', validation.validateToken, productController.updateReview);
 
-router.get("/all", errorHandler(productController.loadProductList));
-router.get("/ascending", errorHandler(productController.getProductsByAsc));
-router.get("/descending", errorHandler(productController.getProductsByDesc));
-router.get("/list", errorHandler(productController.getProductsByCategories));
-router.post("/cart", validation.validateToken, errorHandler(productController.addProductAmount));
-router.get("/detail/:productId", errorHandler(productController.getProductDetail));
+router.get("/all", productController.loadProductList);
+router.get("/ascending", productController.getProductsByAsc);
+router.get("/descending", productController.getProductsByDesc);
+router.get("/list", productController.getProductsByCategories);
+router.post("/cart", validation.validateToken, productController.addProductAmount);
+router.get("/detail/:productId", productController.getProductDetail);
 
 module.exports = {
     router
