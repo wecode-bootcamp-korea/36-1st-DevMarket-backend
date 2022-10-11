@@ -82,10 +82,6 @@ const addProductAmount = async (userId, productId, amount) => {
 };
 
 module.exports = {
-    createReview,
-    getReviews,
-    deleteReview,
-    updateReview,
     loadProductList,
     getProductDetail,
     getProductsByAsc,
