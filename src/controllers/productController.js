@@ -2,7 +2,7 @@ const productService = require('../services/productService');
 const AppError = require('../middlewares/appError');
 
 const loadProductList = async (req, res) => {
-    const { offset, limit } = req.query;
+    const { offset, limit } = req.body;
 
     if (!offset || !limit) throw new AppError('KEY_ERROR', 400);
 
@@ -22,7 +22,7 @@ const getProductDetail = async (req, res) => {
 };
 
 const getProductsByAsc = async (req, res) => {
-    const { offset, limit } = req.query;
+    const { offset, limit } = req.body;
 
     if (!offset || !limit) throw new AppError('KEY_ERROR', 400);
 
@@ -32,7 +32,7 @@ const getProductsByAsc = async (req, res) => {
 };
 
 const getProductsByDesc = async (req, res) => {
-    const { offset, limit } = req.query;
+    const { offset, limit } = req.body;
 
     if (!offset || !limit) throw new AppError('KEY_ERROR', 400);
 

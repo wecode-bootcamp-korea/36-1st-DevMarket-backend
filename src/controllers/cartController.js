@@ -1,12 +1,12 @@
 const cartService = require("../services/cartService");
 const AppError = require('../middlewares/appError');
 
-const getCartLists = async (req, res) => {
+const getCartList = async (req, res) => {
     const userId = req.user.id;
 
     if (!userId) throw new AppError('KEY_ERROR', 400);
 
-    const list = await cartService.getCartLists(userId);
+    const list = await cartService.getCartList(userId);
 
     res.status(200).json(list);
 };
@@ -22,38 +22,33 @@ const addProduct = async (req, res) => {
 
     await cartService.addProduct(userId, productId, amount);
 
-    res.status(201).json({ message: "PRODUCT_ADDED" })
+    res.status(201).json({ message: "CART_ADDED" })
 };
 
 const deleteCart = async (req, res) => {
-    const { productId } = req.params;
+    const { cartId } = req.params;
 
-    const userId = req.user.id;
+    if (!cartId) throw new AppError('KEY_ERROR', 400);
 
-    if (!userId || !productId) throw new AppError('KEY_ERROR', 400);
-
-    await cartService.deleteCart(userId, productId);
+    await cartService.deleteCart(cartId);
 
     res.status(200).json({ message: "CART_DELETED" })
 };
 
 const updateAmount = async (req, res) => {
-
     const { amount } = req.body;
 
-    const { productId } = req.params;
+    const { cartId } = req.params;
 
-    const userId = req.user.id;
+    if (!cartId || !amount) throw new AppError('KEY_ERROR', 400);
 
-    if (!userId || !productId || !amount) throw new AppError('KEY_ERROR', 400);
-
-    await cartService.updateAmount(userId, productId, amount);
+    await cartService.updateAmount(cartId, amount);
 
     res.status(201).json({ message: "AMOUNT_UPDATED" });
 };
 
 module.exports = {
-    getCartLists,
+    getCartList,
     addProduct,
     deleteCart,
     updateAmount

@@ -1,11 +1,11 @@
 const cartDao = require("../models/cartDao");
 const AppError = require('../middlewares/appError');
 
-const getCartLists = async (userId) => await cartDao.getProductsList(userId);
+const getCartList = async (userId) => await cartDao.getCartList(userId);
 
-const deleteCart = async (userId, productId) => await cartDao.deleteCart(userId, productId);
+const deleteCart = async (cartId) => await cartDao.deleteCart(cartId);
 
-const updateAmount = async (userId, productId, amount) => await cartDao.updateAmount(userId, productId, amount);
+const updateAmount = async (cartId, amount) => await cartDao.updateAmount(cartId, amount);
 
 const addProduct = async (userId, productId, amount) => {
     const checkCartList = await cartDao.checkCartList(userId, productId);
@@ -16,7 +16,7 @@ const addProduct = async (userId, productId, amount) => {
 };
 
 module.exports = {
-    getCartLists,
+    getCartList,
     addProduct,
     deleteCart,
     updateAmount

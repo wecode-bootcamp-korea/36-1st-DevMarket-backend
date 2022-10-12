@@ -4,9 +4,9 @@ const validation = require('../utils/validators');
 const AppError = require('../middlewares/appError');
 
 const createReview = async (content, userId, productId) => {
-    const product = await productDao(productId);
+    const product = await productDao.getProductById(productId);
 
-    if (!product) throw new AppError('DATA_EXIST', 409);
+    if (!product) throw new AppError('DATA_NOT_EXIST', 409);
 
     await reviewDao.createReview(content, userId, productId);
 }
