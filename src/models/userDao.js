@@ -1,5 +1,5 @@
 const { AppDataSource } = require('./dataSource');
-const appError = require('../middlewares/appError');
+const AppError = require('../middlewares/appError');
 
 const signUp = async (userName, password, name, email, phoneNumber, birth) => {
     try {
@@ -15,7 +15,7 @@ const signUp = async (userName, password, name, email, phoneNumber, birth) => {
             [userName, password, name, email, phoneNumber, birth]
         );
     } catch (err) {
-        throw new appError('INVALID_DATA_INPUT', 500);
+        throw new AppError('INVALID_DATA_INPUT', 500);
     }
 };
 

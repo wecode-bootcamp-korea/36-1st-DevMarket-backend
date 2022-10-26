@@ -1,32 +1,31 @@
 const http = require("http");
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
 require("dotenv").config();
 
-const routes = require("./routes");
+const { createApp } = require("./app");
+const { AppDataSource } = require("./src/models/dataSource");
 
-const app = express();
+const startServer = async () => {
+    const app = createApp();
 
-app.use(cors());
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(routes);
+    app.get("/ping", (req, res) => {
+        res.json({ message: "pong" });
+    });
 
-app.get("/ping", (req, res) => {
-    res.json({ message: "pong" });
-});
+    const server = http.createServer(app);
+    const PORT = process.env.PORT;
 
-const server = http.createServer(app);
-const PORT = process.env.PORT;
+    await AppDataSource.initialize()
+        .then(() => {
+            console.log("Data Source has been initialized");
+        })
+        .catch((err) => {
+            console.error("Error during Data Source initialization", err);
+            database.destroy()
+        })
 
-const start = async () => {
+    server.listen(PORT, () => {
+        console.log(`🚀 Listening on Port ${PORT} 🚀`);
+    });
+}
 
-    try {
-        server.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
-    } catch (err) {
-        console.log(err);
-    }
-};
-
-start();
+startServer();
